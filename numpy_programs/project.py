@@ -5,21 +5,21 @@ class SalesAnalyzer:
         # Seed for reproducibility
         np.random.seed(42)
 
-        # Define months and products
+        
         self.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         self.products = ['Product A', 'Product B', 'Product C']
 
-        # Generate random sales data for 3 products over 12 months
+    
         self.sales_data = np.random.randint(100, 500, size=(3, 12))
 
-        # Add seasonal adjustment
+        
         seasonal_factor = np.array([0.8, 0.9, 1.0, 1.1, 1.2, 1.3,
                                     1.4, 1.3, 1.2, 1.1, 1.0, 0.9])
         self.sales_data = (self.sales_data * seasonal_factor).astype(int)
 
     def basic_stats(self):
-        """Calculate and display basic statistics"""
+
         print("=== BASIC STATISTICS ===")
         total_sales = np.sum(self.sales_data)
         avg_monthly = np.mean(self.sales_data)
@@ -29,7 +29,7 @@ class SalesAnalyzer:
         print(f"Average Monthly Sales: ${avg_monthly:.2f}")
         print(f"Standard Deviation: ${std_monthly:.2f}")
 
-        # Per-product stats
+    
         product_totals = np.sum(self.sales_data, axis=1)
         product_averages = np.mean(self.sales_data, axis=1)
 
@@ -38,7 +38,7 @@ class SalesAnalyzer:
             print(f"{product}: Total=${product_totals[i]:,}, Avg=${product_averages[i]:.2f}")
 
     def monthly_analysis(self):
-        """Analyze monthly trends"""
+        
         print("\n=== MONTHLY ANALYSIS ===")
         monthly_totals = np.sum(self.sales_data, axis=0)
         best_month_idx = np.argmax(monthly_totals)
@@ -53,7 +53,7 @@ class SalesAnalyzer:
         print(f"Average Monthly Growth Rate: {avg_growth:.2f}%")
 
     def product_comparison(self):
-        """Compare performance metrics of products"""
+        
         print("\n=== PRODUCT COMPARISON ===")
         product_metrics = {}
 
@@ -79,7 +79,7 @@ class SalesAnalyzer:
         print(f"Best Growth: {best_growth[0]} ({best_growth[1]['growth']:.1f}%)")
 
     def forecasting(self):
-        """Forecast next 3 months using linear regression"""
+        
         print("\n=== FORECASTING ===")
         months_numeric = np.arange(12)
 
@@ -93,14 +93,14 @@ class SalesAnalyzer:
             print(f"{product} Forecast (Next 3 months): "
                   f"${forecast[0]:.0f}, ${forecast[1]:.0f}, ${forecast[2]:.0f}")
 
-            # R² value for trendline
+            
             ss_res = np.sum((self.sales_data[i] - trend_line) ** 2)
             ss_tot = np.sum((self.sales_data[i] - np.mean(self.sales_data[i])) ** 2)
             r_squared = 1 - (ss_res / ss_tot)
             print(f"  Trend Fit (R²): {r_squared:.3f}")
 
     def correlation_analysis(self):
-        """Display correlation between products"""
+    
         print("\n=== CORRELATION ANALYSIS ===")
         correlation_matrix = np.corrcoef(self.sales_data)
 
@@ -111,7 +111,7 @@ class SalesAnalyzer:
                 print(f"{self.products[i]} vs {self.products[j]}: {corr:.3f}")
 
     def run_full_analysis(self):
-        """Run complete dashboard analysis"""
+        
         print("\nSALES ANALYSIS DASHBOARD")
         print("=" * 50)
         self.basic_stats()
@@ -127,6 +127,5 @@ class SalesAnalyzer:
         print(self.sales_data)
 
 
-# Execute the full analysis
 analyzer = SalesAnalyzer()
 analyzer.run_full_analysis()
