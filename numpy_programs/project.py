@@ -125,6 +125,7 @@ class SalesAnalyzer:
         print("Products:", self.products)
         print("Months:", self.months)
         print(self.sales_data)
+        print("products:",self.products)
 
 
 analyzer = SalesAnalyzer()
